@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <title>팀원 소개</title>
+
+    <style>
+     *{
+            font-family: 'Do Hyeon', sans-serif;
+        }
+
+     .mytitle {
+         width: 100%;
+         height: 200px;
+
+         background-color: palegreen;
+         background-position: center;
+         background-size: cover;
+
+         color: black;
+
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;
+         flex-wrap: wrap;
+
+    }
+
+    .mytitle > h1 {
+        margin-right: 40px;
+        font-size: 100px;
+    }
+
+    .list-group {
+        width: 500px;
+        margin-top: 10px;
+    }
+
+    .img {
+        width: 480px;
+        height: 480px;
+        margin-right: 10px;
+
+        border: 5px palegreen solid;
+        border-radius: 10px;
+    }
+
+    .box {
+        background-color: whitesmoke;
+        width: 100%;
+        max-width: 2000px;
+        height: 600px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        margin: 5px auto 0px auto;
+    }
+
+    .cards {
+        margin-left: 10px;
+
+        padding: 10px;
+        border: 5px palegreen solid;
+        border-radius: 10px;
+    }
+
+    .card-body {
+        flex-wrap: wrap;
+    }
+
+    .comment {
+
+        width: 900px;
+        margin: 20px auto;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .input-group {
+        height: 80px;
+        width: 99%;
+        border: 10px palegreen solid;
+        border-radius: 10px;
+    }
+    .btn {
+        background-color: palegreen;
+        width: 90px;
+    }
+    .btn2 {
+        background-color: white;
+        width: 90px;
+        border-radius: 5px;
+    }
+
+     .input-group > button:hover {
+         font-size: larger;
+     }
+    .input-group > button:hover {
+        background-color: palegreen;
+    }
+
+
+    .mycards {
+        width: 100%;
+    }
+
+    .mycards > .card {
+        border-color: transparent;
+    }
+    .line {
+        color: green;
+        border: 1px solid;
+    }
+
+     .blockquote {
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         align-items: center;
+     }
+</style>
+
+<script>
+        $(document).ready(function () {
+            show_comments();
+        });
+
+    function show_comments() {
+        $.ajax({
+            type: 'GET',
+            url: '/comments_SJ',
+            data: {},
+            success: function (response) {
+                let rows = response['comments']
+                for (let i = 0; i < rows.length; i++) {
+                    let comment = rows[i]['comment']
+
+                    let temp_html = `<div class="card">
+                                        <div class="card-body">
+                                                <blockquote class="blockquote mb-0">
+                                                            <p>${comment}</p>
+                                                            <button onclick="delete_comment('${comment}')" type="button"  class="btn2 btn-outline-danger">삭제</button>
+                                                </blockquote>
+                                            <hr class="line">
+                                        </div>
+                                     </div>`
+                    $('#comment_box').prepend(temp_html)
+                }
+            }
+        });
+    }
+    function save_comment(){
+        let comment_SJ = $('#comment').val()
+
+        $.ajax({
+                type: 'POST',
+                url: '/comments_SJ',
+                data: { comment_give : comment_SJ},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+    }
+    function delete_comment(comment){
+        $.ajax({
+            type: 'POST',
+            url: '/delete_SJ',
+            data: {comment_give:comment},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload()
+            }
+            });
+    }
+</script>
+</head>
+<body>
+    <div class="mytitle">
+        <h1 class="display-1">조성제</h1>
+        <div class="list-group">
+            <ul class="list-group list-group-flush">
+                <p>🔥</p>
+                <p><a href="https://velog.io/@sj_">블로그</a></p>
+            </ul>
+        </div>
+    </div>
+    <div class="box">
+        <img src="https://velog.velcdn.com/images/sj_/post/e964955b-79dc-4d05-b5c0-6c398c75e2e1/image.jpg"
+             class="img" alt="...">
+        <div class="cards" style="width: 60rem;">
+            <div class="card-body">
+                <h5 class="card-title">MBTI</h5>
+                <p class="card-text">ISTP</p>
+            </div>
+            <hr class="line">
+            <div class="card-body">
+                <h5 class="card-title">장점</h5>
+                <p class="card-text">하나에 흥미가 생기면 집요하게 파고드는 편</p>
+            </div>
+            <hr class="line">
+            <div class="card-body">
+                <h5 class="card-title">협업 스타일</h5>
+                <p class="card-text">팀원의 의견을 최대한 따르며 의견을 내야 될 때는 내는 스타일입니다</p>
+            </div>
+            <hr class="line">
+            <div class="card-body">
+                <h5 class="card-title">TMI</h5>
+                <p class="card-text">막학기 드디어 졸업!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="comment">
+        <div class="input-group mb-3">
+            <input id="comment" type="text" class="form-control" placeholder="방명록" aria-label="Recipient's username"
+                   aria-describedby="button-addon2">
+            <button onclick="save_comment()" class="btn" type="button" id="button-addon2">남기기</button>
+        </div>
+
+        <div class="mycards" id="comment_box">
+
+        </div>
+    </div>
+</body>
+</html>
