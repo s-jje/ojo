@@ -138,7 +138,7 @@
         }
     </style>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             show_comment();
         });
 
@@ -163,7 +163,7 @@
                                             <form class="hidden-comment"><textarea id="${comment_id}-hidden">${comment}</textarea>
                                                 <footer class="blockquote-footer">${name} (${time})</footer>
                                                 <button onclick="update_comment('${comment_id}')" type="button" id="${comment_id}-update-btn" class="btn btn-outline-warning">수정</button>
-                                                <button onclick="register_updated_comment('${comment_id}-hidden')" type="button" id="${comment_id}-register-btn" class="btn btn-outline-dark">등록</button>
+                                                <button onclick="register_updated_comment('${comment_id}')" type="button" id="${comment_id}-register-btn" class="btn btn-outline-dark">등록</button>
                                                 <button onclick="delete_comment('${comment_id}')" type="button" id="${comment_id}-delete-btn" class="btn btn-outline-danger">삭제</button>
                                             </form>
                                         </blockquote>
@@ -186,7 +186,6 @@
                 url: '/comments',
                 data: {comment_give: comment, name_give: name, time_give: time},
                 success: function (response) {
-                    console.log(response);
                     window.location.reload();
                 },
             });
@@ -200,12 +199,13 @@
             document.getElementById(comment_id + '-delete-btn').style.display = 'none';
         }
 
-        function register_updated_comment(comment_id_hidden) {
-            let comment = document.getElementById(comment_id_hidden).value;
+        function register_updated_comment(comment_id) {
+            let comment = document.getElementById(comment_id + '-hidden').value;
+
             $.ajax({
                 type: 'UPDATE',
                 url: '/comments/update',
-                data: {comment_id_give: comment_id_hidden.slice(0, -7), comment_give: comment},
+                data: {comment_id_give: comment_id, comment_give: comment},
                 success: function (response) {
                     window.location.reload();
                 },
