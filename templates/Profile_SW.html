@@ -15,184 +15,188 @@
 
     <title>팀원 소개 페이지_<이상우></title>
 </head>
-<style>
-     *{
-            font-family: 'Do Hyeon', sans-serif;
+    <style>
+         * {
+                font-family: 'Do Hyeon', sans-serif;
+         }
+
+         .mytitle {
+             width: 100%;
+             height: 200px;
+
+             background-color: palegreen;
+             background-position: center;
+             background-size: cover;
+
+             color: black;
+
+             display: flex;
+             flex-direction: row;
+             justify-content: center;
+             align-items: center;
+             flex-wrap: wrap;
+
         }
 
-     .mytitle {
-         width: 100%;
-         height: 200px;
+        .mytitle > h1 {
+            margin-right: 40px;
+            font-size: 100px;
+        }
 
-         background-color: palegreen;
-         background-position: center;
-         background-size: cover;
+        .list-group {
+            width: 500px;
+            margin-top: 10px;
+        }
 
-         color: black;
+        .img {
+            width: 480px;
+            height: 480px;
+            margin-right: 10px;
 
-         display: flex;
-         flex-direction: row;
-         justify-content: center;
-         align-items: center;
-         flex-wrap: wrap;
+            border: 5px palegreen solid;
+            border-radius: 10px;
+        }
 
-    }
+        .box {
+            background-color: whitesmoke;
+            width: 100%;
+            max-width: 2000px;
+            height: 600px;
 
-    .mytitle > h1 {
-        margin-right: 40px;
-        font-size: 100px;
-    }
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
 
-    .list-group {
-        width: 500px;
-        margin-top: 10px;
-    }
+            margin: 5px auto 0px auto;
+        }
 
-    .img {
-        width: 480px;
-        height: 480px;
-        margin-right: 10px;
+        .cards {
+            margin-left: 10px;
 
-        border: 5px palegreen solid;
-        border-radius: 10px;
-    }
+            padding: 10px;
+            border: 5px palegreen solid;
+            border-radius: 10px;
+        }
 
-    .box {
-        background-color: whitesmoke;
-        width: 100%;
-        max-width: 2000px;
-        height: 600px;
+        .card-body {
+            flex-wrap: wrap;
+        }
 
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        .comment {
 
-        margin: 5px auto 0px auto;
-    }
+            width: 900px;
+            margin: 20px auto;
 
-    .cards {
-        margin-left: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
 
-        padding: 10px;
-        border: 5px palegreen solid;
-        border-radius: 10px;
-    }
+        }
 
-    .card-body {
-        flex-wrap: wrap;
-    }
+        .input-group {
+            height: 80px;
+            width: 99%;
+            border: 10px palegreen solid;
+            border-radius: 10px;
+        }
 
-    .comment {
+        .btn {
+            background-color: palegreen;
+            width: 90px;
+        }
 
-        width: 900px;
-        margin: 20px auto;
+        .btn2 {
+            background-color: white;
+            width: 90px;
+            border-radius: 5px;
+        }
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        .input-group > button:hover {
+            font-size: larger;
+        }
 
-    }
+        .input-group > button:hover {
+            background-color: palegreen;
+        }
 
-    .input-group {
-        height: 80px;
-        width: 99%;
-        border: 10px palegreen solid;
-        border-radius: 10px;
-    }
-    .btn {
-        background-color: palegreen;
-        width: 90px;
-    }
-    .btn2 {
-        background-color: white;
-        width: 90px;
-        border-radius: 5px;
-    }
+        .mycards {
+            width: 100%;
+        }
 
-     .input-group > button:hover {
-         font-size: larger;
-     }
-    .input-group > button:hover {
-        background-color: palegreen;
-    }
+        .card {
+            border-color: transparent;
+        }
 
+        .line {
+            color: green;
+            border: 1px solid;
+        }
 
-    .mycards {
-        width: 100%;
-    }
-
-    .mycards > .card {
-        border-color: transparent;
-    }
-    .line {
-        color: green;
-        border: 1px solid;
-    }
-
-     .blockquote {
-         display: flex;
-         flex-direction: row;
-         justify-content: space-between;
-         align-items: center;
-     }
-</style>
-<script>
-    $(document).ready(function () {
+        .blockquote {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
             show_comments();
         });
 
-    function show_comments() {
-        $.ajax({
-            type: 'GET',
-            url: '/comments_SW',
-            data: {},
-            success: function (response) {
-                let rows = response['comments']
-                for (let i = 0; i < rows.length; i++) {
-                    let comment = rows[i]['comment']
+        function show_comments() {
+            $.ajax({
+                type: 'GET',
+                url: '/sw/comments',
+                data: {},
+                success: function (response) {
+                    let rows = response['comments'];
+                    for (let i = 0; i < rows.length; i++) {
+                        let comment = rows[i]['comment'];
 
-                    let temp_html = `<div class="card">
-                                        <div class="card-body">
-                                                <blockquote class="blockquote mb-0">
-                                                            <p>${comment}</p>
-                                                            <button onclick="delete_comment('${comment}')" type="button"  class="btn2 btn-outline-danger">삭제</button>
-                                                </blockquote>
-                                            <hr class="line">
-                                        </div>
-                                     </div>`
-                    $('#comment_box').prepend(temp_html)
+                        let temp_html = `<div class="card">
+                                            <div class="card-body">
+                                                    <blockquote class="blockquote mb-0">
+                                                                <p>${comment}</p>
+                                                                <button onclick="delete_comment('${comment}')" type="button" class="btn2 btn-outline-danger">삭제</button>
+                                                    </blockquote>
+                                                <hr class="line">
+                                            </div>
+                                         </div>`;
+                        $('#comment_box').prepend(temp_html);
+                    }
                 }
-            }
-        });
-    }
-    function save_comment() {
-        let comment_SW = $('#comment').val()
-
-        $.ajax({
-            type: 'POST',
-            url: '/comments_SW',
-            data: {comment_give: comment_SW},
-            success: function (response) {
-                alert(response['msg'])
-                window.location.reload()
-            }
             });
-    }
-    function delete_comment(comment){
-        $.ajax({
-            type: 'POST',
-            url: '/delete_SW',
-            data: {comment_give:comment},
-            success: function (response) {
-                alert(response['msg'])
-                window.location.reload()
-            }
-            });
-    }
-</script>
+        }
 
+        function save_comment() {
+            let comment_SW = $('#comment').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/sw/comments',
+                data: {comment_give: comment_SW},
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload();
+                }
+            });
+        }
+
+        function delete_comment(comment){
+            $.ajax({
+                type: 'DELETE',
+                url: '/sw/comments',
+                data: {comment_give: comment},
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
 <body>
     <div class="mytitle">
         <h1 class="display-1">이상우</h1>

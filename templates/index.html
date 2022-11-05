@@ -203,8 +203,8 @@
             let comment = document.getElementById(comment_id + '-hidden').value;
 
             $.ajax({
-                type: 'UPDATE',
-                url: '/comments/update',
+                type: 'PUT',
+                url: '/comments',
                 data: {comment_id_give: comment_id, comment_give: comment},
                 success: function (response) {
                     window.location.reload();
@@ -221,7 +221,7 @@
         function delete_comment(comment_id) {
             $.ajax({
                 type: 'DELETE',
-                url: '/comments/delete',
+                url: '/comments',
                 data: {comment_id_give: comment_id},
                 success: function (response) {
                     window.location.reload();
@@ -237,24 +237,24 @@
             $('#comment-box').hide();
         }
 
-        function show_member1(){
-            window.open("/popup1" ,"_blank", "width=2600,height=2100");
+        function show_sw(){
+            window.open("/sw" ,"_blank", "width=2600,height=2100");
         }
 
-        function show_member2(){
-            window.open("/popup2" , "_blank", "width=2600,height=2100");
+        function show_se(){
+            window.open("/se" , "_blank", "width=2600,height=2100");
         }
 
-        function show_member3(){
-            window.open("/popup3" , "_blank", "width=2600,height=2100");
+        function show_yb(){
+            window.open("/yb" , "_blank", "width=2600,height=2100");
         }
 
-        function show_member4(){
-            window.open("/popup4" , "_blank", "width=2600,height=2100");
+        function show_sj(){
+            window.open("/sj" , "_blank", "width=2600,height=2100");
         }
 
-        function show_member5(){
-            window.open("/popup5" , "_blank", "width=2600,height=2100");
+        function show_yj(){
+            window.open("/yj" , "_blank", "width=2600,height=2100");
         }
     </script>
 </head>
@@ -280,7 +280,7 @@
 
     <div class="member-cards">
         <div class="row row-cols-1 row-cols-md-5 g-4" id="cards-box">
-            <div onclick="show_member1()" class="col">
+            <div onclick="show_sw()" class="col">
                 <div class="card">
                     <img src="https://velog.velcdn.com/images/lswoo0705/post/af079949-6adf-429b-9a14-9eaf25e0a9ed/image.jpeg"
                          class="card-img-top" alt="...">
@@ -292,7 +292,7 @@
                     </ul>
                 </div>
             </div>
-            <div onclick="show_member2()" class="col">
+            <div onclick="show_se()" class="col">
                 <div class="card">
                     <img src="https://velog.velcdn.com/images/8essong30/profile/0de269c7-1432-4a38-9249-2eb6e2f76f23/image.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -303,7 +303,7 @@
                     </ul>
                 </div>
             </div>
-            <div onclick="show_member3()" class="col">
+            <div onclick="show_yb()" class="col">
                 <div class="card">
                     <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FSMg66%2FbtrP7UPSZoA%2FY3mXiJe7dwtCN5J6g2ZSXk%2Fimg.jpg"
                          class="card-img-top" alt="...">
@@ -315,7 +315,7 @@
                     </ul>
                 </div>
             </div>
-            <div onclick="show_member4()" class="col">
+            <div onclick="show_sj()" class="col">
                 <div class="card">
                     <img src="https://velog.velcdn.com/images/sj_/post/e964955b-79dc-4d05-b5c0-6c398c75e2e1/image.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -326,7 +326,7 @@
                     </ul>
                 </div>
             </div>
-            <div onclick="show_member5()" class="col">
+            <div onclick="show_yj()" class="col">
                 <div class="card">
                     <img src="https://velog.velcdn.com/images/dripmaster44/post/fbead192-9d15-4a43-9cfb-06ca6091ce09/image.jpg"
                          class="card-img-top" alt="...">
