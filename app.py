@@ -57,32 +57,32 @@ def update_comment():
 
 
 @app.route('/sw')
-def popup1():
+def popup_sw():
     return render_template('Profile_SW.html')
 
 
 @app.route('/se')
-def popup2():
+def popup_se():
     return render_template('Profile_SE.html')
 
 
 @app.route('/yb')
-def popup3():
+def popup_yb():
     return render_template('Profile_YB.html')
 
 
 @app.route('/sj')
-def popup4():
+def popup_sj():
     return render_template('Profile_SJ.html')
 
 
 @app.route('/yj')
-def popup5():
+def popup_yj():
     return render_template('Profile_YJ.html')
 
 
 @app.route("/sw/comments", methods=["POST"])
-def comment_post1():
+def post_comment_sw():
     comment_receive = request.form['comment_give']
     doc = {
         'comment': comment_receive,
@@ -93,7 +93,7 @@ def comment_post1():
 
 
 @app.route("/se/comments", methods=["POST"])
-def comments_post2():
+def post_comments_se():
     comment_receive = request.form['comment_give']
     doc = {
         'comment': comment_receive,
@@ -104,7 +104,7 @@ def comments_post2():
 
 
 @app.route("/yb/comments", methods=["POST"])
-def comments_post3():
+def post_comments_yb():
     comment_receive = request.form['comment_give']
     doc = {
         'comment': comment_receive,
@@ -115,7 +115,7 @@ def comments_post3():
 
 
 @app.route("/sj/comments", methods=["POST"])
-def comments_post4():
+def post_comments_sj():
     comment_receive = request.form['comment_give']
     doc = {
         'comment': comment_receive,
@@ -126,7 +126,7 @@ def comments_post4():
 
 
 @app.route("/yj/comments", methods=["POST"])
-def comments_post5():
+def post_comments_yj():
     comment_receive = request.form['comment_give']
     doc = {
         'comment': comment_receive,
@@ -137,66 +137,66 @@ def comments_post5():
 
 
 @app.route("/sw/comments", methods=['DELETE'])
-def delete_comment1():
+def delete_comment_sw():
     delete_receive = request.form['comment_give']
     db.comments_SW.delete_one({'comment': delete_receive})
     return jsonify({'msg': '삭제 완료!'})
 
 
-@app.route("/delete_SE", methods=['DELETE'])
-def delete_comment2():
+@app.route("/se/comments", methods=['DELETE'])
+def delete_comment_se():
     delete_receive = request.form['comment_give']
     db.comments_SE.delete_one({'comment': delete_receive})
     return jsonify({'msg': '삭제 완료!'})
 
 
 @app.route("/yb/comments", methods=['DELETE'])
-def delete_comment3():
+def delete_comment_yb():
     delete_receive = request.form['comment_give']
     db.comments_YB.delete_one({'comment': delete_receive})
     return jsonify({'msg': '삭제 완료!'})
 
 
 @app.route("/sj/comments", methods=['DELETE'])
-def delete_comment4():
+def delete_comment_sj():
     delete_receive = request.form['comment_give']
     db.comments_SJ.delete_one({'comment': delete_receive})
     return jsonify({'msg': '삭제 완료!'})
 
 
 @app.route("/yj/comments", methods=['DELETE'])
-def delete_comment5():
+def delete_comment_yj():
     delete_receive = request.form['comment_give']
     db.comments_YJ.delete_one({'comment': delete_receive})
     return jsonify({'msg': '삭제 완료!'})
 
 
 @app.route("/sw/comments", methods=["GET"])
-def comments_get1():
+def show_comments_sw():
     comments_list = list(db.comments_SW.find({}, {'_id': False}))
     return jsonify({'comments': comments_list})
 
 
 @app.route("/se/comments", methods=["GET"])
-def comments_get2():
+def show_comments_se():
     comments_list = list(db.comments_SE.find({}, {'_id': False}))
     return jsonify({'comments': comments_list})
 
 
 @app.route("/yb/comments", methods=["GET"])
-def comments_get3():
+def show_comments_yb():
     comments_list = list(db.comments_YB.find({}, {'_id': False}))
     return jsonify({'comments': comments_list})
 
 
 @app.route("/sj/comments", methods=["GET"])
-def comments_get4():
+def show_comments_sj():
     comments_list = list(db.comments_SJ.find({}, {'_id': False}))
     return jsonify({'comments': comments_list})
 
 
 @app.route("/yj/comments", methods=["GET"])
-def comments_get5():
+def show_comments_yj():
     comments_list = list(db.comments_YJ.find({}, {'_id': False}))
     return jsonify({'comments': comments_list})
 
