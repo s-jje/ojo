@@ -47,7 +47,7 @@ def delete_comment():
     return jsonify({'msg': '댓글 삭제 완료'})
 
 
-@app.route('/comments', methods=['PUT'])
+@app.route('/comments', methods=['PATCH'])
 def update_comment():
     comment_id_receive = ObjectId(request.form['comment_id_give'])
     comment_receive = request.form['comment_give']

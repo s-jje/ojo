@@ -203,7 +203,7 @@
             let comment = document.getElementById(comment_id + '-hidden').value;
 
             $.ajax({
-                type: 'PUT',
+                type: 'PATCH',
                 url: '/comments',
                 data: {comment_id_give: comment_id, comment_give: comment},
                 success: function (response) {
